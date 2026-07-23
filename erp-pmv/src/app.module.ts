@@ -12,6 +12,10 @@ import { PermissionsModule } from './modules/permissions/permissions.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { RolesModule } from './modules/roles/roles.module';
+import { SuppliersModule } from './modules/suppliers/suppliers.module';
+import { PurchasesModule } from './modules/purchases/purchases.module';
+import { ProductCategoriesModule } from './modules/product-categories/product-categories.module';
+import { ProductsModule } from './modules/products/products.module';
 
 
 @Module({
@@ -46,6 +50,14 @@ import { RolesModule } from './modules/roles/roles.module';
     AuthModule,
    
     RolesModule,
+   
+    SuppliersModule,
+   
+    PurchasesModule,
+   
+    ProductCategoriesModule,
+   
+    ProductsModule,
     // SuppliersModule,
     // PurchasesModule,
     // ProductsModule,
