@@ -14,6 +14,7 @@ export default registerAs(
     entities: [join(__dirname, '../**/*.entity{.ts,.js}')],
     migrations: [join(__dirname, '../database/migrations/*{.ts,.js}')],
     synchronize: false,
+    migrationsRun: true,      // ← esto es todo lo que se agrega
     logging: process.env.DB_LOGGING === 'true',
     ssl:
       process.env.NODE_ENV === 'production'

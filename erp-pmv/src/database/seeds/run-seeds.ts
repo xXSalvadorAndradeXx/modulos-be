@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { dataSourceOptions } from '../data-source';
 import { Logger } from '@nestjs/common';
+import { runPermissionsSeed } from './permissions.seed';
 
 const logger = new Logger('Seeds');
 
@@ -10,11 +11,12 @@ async function runSeeds(): Promise<void> {
   await dataSource.initialize();
 
   try {
-    logger.log('Seeds ejecutados correctamente.');
-    // Los seeds individuales se importarán aquí en pasos posteriores:
-    // await runPermissionsSeed(dataSource);
+    logger.log('=== Ejecutando seeds ===');
+    await runPermissionsSeed(dataSource);
+    // Los siguientes seeds se agregarán en sus pasos correspondientes:
     // await runRolesSeed(dataSource);
     // await runSuperAdminSeed(dataSource);
+    logger.log('=== Seeds completados correctamente ===');
   } catch (error) {
     logger.error('Error ejecutando seeds:', error);
     throw error;

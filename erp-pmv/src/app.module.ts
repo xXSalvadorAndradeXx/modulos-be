@@ -7,24 +7,22 @@ import databaseConfig from './config/database.config';
 import jwtConfig from './config/jwt.config';
 import throttlerConfig from './config/throttler.config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { PermissionsModule } from './modules/permissions/permissions.module';
 
 @Module({
   imports: [
-    // ── Configuración de variables de entorno ──────────────────────────
     ConfigModule.forRoot({
       isGlobal: true,
       load: [appConfig, databaseConfig, jwtConfig, throttlerConfig],
       envFilePath: ['.env'],
     }),
 
-    // ── Base de datos ─────────────────────────────────────────────────
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService): TypeOrmModuleOptions =>
         configService.get<TypeOrmModuleOptions>('database') as TypeOrmModuleOptions,
     }),
 
-    // ── Rate limiting ─────────────────────────────────────────────────
     ThrottlerModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => [
@@ -35,11 +33,10 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
       ],
     }),
 
-    // ── Módulos funcionales (se activarán paso a paso) ─────────────────
+    PermissionsModule,
     // AuthModule,
     // UsersModule,
     // RolesModule,
-    // PermissionsModule,
     // SuppliersModule,
     // PurchasesModule,
     // ProductsModule,
@@ -49,4 +46,3 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
   ],
 })
 export class AppModule {}
-
