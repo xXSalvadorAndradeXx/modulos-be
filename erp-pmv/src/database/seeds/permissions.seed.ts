@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { Permission } from '../../modules/permissions/entities/permission.entity';
+import { Permission } from '../../modules/permissions/dto/permission.entity';
 import { Logger } from '@nestjs/common';
 
 const logger = new Logger('PermissionsSeed');

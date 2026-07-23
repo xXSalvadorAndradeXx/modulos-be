@@ -9,6 +9,10 @@ import throttlerConfig from './config/throttler.config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { PermissionsModule } from './modules/permissions/permissions.module';
+import { UsersModule } from './modules/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { RolesModule } from './modules/roles/roles.module';
+
 
 @Module({
   controllers: [AppController],
@@ -36,9 +40,12 @@ import { PermissionsModule } from './modules/permissions/permissions.module';
     }),
 
     PermissionsModule,
-    // AuthModule,
-    // UsersModule,
-    // RolesModule,
+
+    UsersModule,
+
+    AuthModule,
+   
+    RolesModule,
     // SuppliersModule,
     // PurchasesModule,
     // ProductsModule,
