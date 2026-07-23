@@ -7,9 +7,11 @@ import databaseConfig from './config/database.config';
 import jwtConfig from './config/jwt.config';
 import throttlerConfig from './config/throttler.config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { AppController } from './app.controller';
 import { PermissionsModule } from './modules/permissions/permissions.module';
 
 @Module({
+  controllers: [AppController],
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
