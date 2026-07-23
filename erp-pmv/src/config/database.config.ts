@@ -1,5 +1,6 @@
 import { registerAs } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { join } from 'path';
 
 export default registerAs(
   'database',
@@ -10,10 +11,13 @@ export default registerAs(
     username: process.env.DB_USERNAME || 'erp_user',
     password: process.env.DB_PASSWORD || 'erp_password',
     database: process.env.DB_DATABASE || 'erp_pmv',
-    entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-    migrations: [__dirname + '/../database/migrations/*{.ts,.js}'],
+    entities: [join(__dirname, '../**/*.entity{.ts,.js}')],
+    migrations: [join(__dirname, '../database/migrations/*{.ts,.js}')],
     synchronize: false,
     logging: process.env.DB_LOGGING === 'true',
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+    ssl:
+      process.env.NODE_ENV === 'production'
+        ? { rejectUnauthorized: false }
+        : false,
   }),
 );
