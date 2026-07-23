@@ -20,6 +20,7 @@ export class PurchasesService {
     @InjectRepository(PurchaseItem)
     private readonly itemRepo: Repository<PurchaseItem>,
     private readonly dataSource: DataSource,
+    
   ) {}
 
   async findAll(query: QueryPurchaseDto) {

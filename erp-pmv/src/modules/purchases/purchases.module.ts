@@ -5,9 +5,13 @@ import { Purchase } from './entities/purchase.entity';
 import { PurchaseItem } from './entities/purchase-item.entity';
 import { PurchasesController } from './purchases.controller';
 import { PurchasesService } from './purchases.service';
+import { InventoryModule } from '../inventory/inventory.module';  // ← agregar
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Purchase, PurchaseItem])],
+  imports: [
+    TypeOrmModule.forFeature([Purchase, PurchaseItem]),
+    InventoryModule,  // ← agregar
+  ],
   controllers: [PurchasesController],
   providers: [PurchasesService],
   exports: [PurchasesService],
