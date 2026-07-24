@@ -1,6 +1,6 @@
 // src/modules/auth/auth.controller.ts
 import {
-  Controller, Post, Body, Req,
+  Controller, Post, Get, Body, Req,
   UseGuards, HttpCode, HttpStatus,
 } from '@nestjs/common';
 import {
@@ -11,6 +11,8 @@ import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { ForgotPasswordDto } from './dto/forgot-password.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { JwtRefreshGuard } from '../../common/guards/jwt-refresh.guard';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
@@ -60,5 +62,27 @@ export class AuthController {
     @CurrentUser() user: { id: string },
   ) {
     return this.authService.changePassword(user.id, dto);
+  }
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('access-token')
+  @ApiOperation({ summary: 'Obtener perfil del usuario autenticado' })
+  getMe(@CurrentUser() user: { id: string }) {
+    return this.authService.getMe(user.id);
+  }
+
+  @Post('forgot-password')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: 'Solicitar restablecimiento de contraseña por email' })
+  forgotPassword(@Body() dto: ForgotPasswordDto) {
+    return this.authService.forgotPassword(dto.email);
+  }
+
+  @Post('reset-password')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: 'Restablecer contraseña con token del email' })
+  resetPassword(@Body() dto: ResetPasswordDto) {
+    return this.authService.resetPassword(dto);
   }
 }
