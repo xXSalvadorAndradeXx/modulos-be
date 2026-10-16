@@ -1,0 +1,1 @@
+const test=require('node:test'),assert=require('node:assert/strict');const {money,hash,secureEqual}=require('../lib');test('redondeo de importes',()=>assert.equal(money(1.255),1.25));test('token con comparación constante',()=>{assert.equal(secureEqual(hash('foo'),hash('foo')),true);assert.equal(secureEqual(hash('foo'),hash('bar')),false)});

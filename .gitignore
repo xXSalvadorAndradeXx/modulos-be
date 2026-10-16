@@ -1,0 +1,6 @@
+node_modules/
+.env
+backend/storage/pdfcotizacion/*
+backend/storage/factura/*
+backend/storage/pdffactura/*
+!backend/storage/**/.gitkeep

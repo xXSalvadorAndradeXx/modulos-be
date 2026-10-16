@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Wood·Stone – Piedra que se adapta a tu forma de vivir</title>
+
+<!-- Biblioteca externa: solo Google Fonts (Instrument Serif + Manrope). Sin ella se usan fuentes del sistema. Las texturas de piedra se generan con SVG, sin imágenes externas. -->
+
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/variables.css">
+<link rel="stylesheet" href="/css/global.css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+</head>
+
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs id="defs"></defs></svg>
+
+<header><div class="wrap nav">
+
+  <a class="logo" href="#inicio">Wood<b>·</b>Stone</a>
+
+  <button class="burger" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+  <nav aria-label="Principal"><a href="#adaptamos">Nos adaptamos</a><a href="#disena">Diseña tu superficie</a><a href="#coleccion">Colección</a><a href="#ambientes">Ambientes</a><a href="#servicios">Servicios</a><a href="#contacto">Contacto</a><a href="/productos.html">Comprar / Cotizar</a><a href="/seguimiento.html">Seguimiento</a></nav>
+
+  <button class="qbtn" id="open" aria-haspopup="dialog">Mi cotización<span id="n">0</span></button>
+
+</div></header>
+
+
+
+<main id="inicio">
+
+<section class="hero"><div class="wrap hg">
+
+  <div>
+
+    <h1>Piedra que se adapta a tu <i>forma de vivir.</i></h1>
+
+    <p>Granito, cuarzo y mármol cortados y acabados a la medida de tu espacio, tu estilo y tu proyecto. Elige una superficie y mira cómo cambia todo.</p>
+
+    <div class="acts"><a class="btn fill" href="#disena">Diseñar mi superficie</a><a class="btn ln" href="#coleccion">Ver colección</a></div>
+
+  </div>
+
+  <div>
+
+    <div class="arch" id="arch" role="img" aria-label="Muestra de piedra seleccionada"></div>
+
+    <div class="cap"><strong id="hn"></strong><span id="hd"></span>
+
+      <div class="swatches" id="sw" role="group" aria-label="Elegir piedra"></div></div>
+
+  </div>
+
+</div></section>
+
+
+
+<section class="ad" id="adaptamos"><div class="wrap">
+
+  <h2>Cada proyecto es distinto. Nuestra forma de trabajar también.</h2>
+
+  <p class="lead">No te pedimos que te adaptes a un catálogo. Nos adaptamos a ti, desde la primera idea hasta la instalación.</p>
+
+  <div class="adg">
+
+    <div><h3>A tu espacio</h3><p>Medidas, cortes y piezas pensados para tu cocina, baño u oficina.</p></div>
+
+    <div><h3>A tu estilo</h3><p>Clásico, moderno o atemporal: la piedra, el color y el acabado los eliges tú.</p></div>
+
+    <div><h3>A tu proyecto</h3><p>Hogares, negocios y obras de alto tránsito, grandes o pequeños.</p></div>
+
+    <div><h3>A tu presupuesto</h3><p>Te asesoramos para encontrar la mejor opción dentro de lo que planeas invertir.</p></div>
+
+  </div>
+
+</div></section>
+
+
+
+<section id="disena"><div class="wrap">
+
+  <h2>Diseña tu superficie</h2>
+
+  <p class="lead">Combina piedra, gabinetes y acabado. Es una vista conceptual: nuestro equipo la lleva a tu espacio real y te entrega una propuesta personalizada.</p>
+
+  <div class="cf">
+
+    <div class="scene" id="scene" aria-live="polite" role="img" aria-label="Vista conceptual de una cocina con tus selecciones">
+
+      <div class="up l"></div><div class="up r"></div><div class="bs" id="bs"></div><div class="fx" id="fx"></div><div class="tp" id="tp"></div><div class="sh" id="shine"></div><div class="cb" id="cb"></div><div class="fl"></div>
+
+    </div>
+
+    <div>
+
+      <fieldset class="opt"><legend>Espacio</legend><div class="chs" id="o-esp"></div></fieldset>
+
+      <fieldset class="opt"><legend>Piedra</legend><div class="chs" id="o-pie"></div></fieldset>
+
+      <fieldset class="opt"><legend>Gabinetes</legend><div class="chs" id="o-gab"></div></fieldset>
+
+      <fieldset class="opt"><legend>Acabado</legend><div class="chs" id="o-aca"></div></fieldset>
+
+      <p class="res" id="res"></p>
+
+      <button class="btn dk" id="guardar" type="button">Agregar a mi cotización</button>
+
+    </div>
+
+  </div>
+
+</div></section>
+
+
+
+<section class="col" id="coleccion"><div class="wrap">
+
+  <div class="sh2"><div><h2>La colección</h2><p class="lead">Nuestras superficies más elegidas. Los precios son de referencia; confirmamos el valor final según tu proyecto.</p></div>
+
+  <div class="ar"><button aria-label="Anterior" data-d="-1">‹</button><button aria-label="Siguiente" data-d="1">›</button></div></div>
+
+  <div class="rail" id="rail"></div>
+
+</div></section>
+
+
+
+<section id="ambientes"><div class="wrap">
+
+  <h2>Ambientes que inspiran</h2>
+
+  <p class="lead">Proyectos con 10% de descuento por tiempo limitado. Condiciones y vigencia se confirman al cotizar.</p>
+
+  <div class="amb">
+
+    <figure class="ph"><span class="off">-10%</span><img loading="lazy" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1400&q=80" alt="Cocina con gabinetes oscuros y cubierta clara" onerror="this.remove()"><figcaption><h3>Cocina contraste</h3><a href="#" data-add="Ambiente: Cocina contraste">Cotizar este ambiente</a></figcaption></figure>
+
+    <figure class="ph"><span class="off">-10%</span><img loading="lazy" src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80" alt="Baño con cubierta de piedra" onerror="this.remove()"><figcaption><h3>Baño en piedra</h3><a href="#" data-add="Ambiente: Baño en piedra">Cotizar este ambiente</a></figcaption></figure>
+
+    <figure class="ph"><span class="off">-10%</span><img loading="lazy" src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=1000&q=80" alt="Cubierta de mármol blanco" onerror="this.remove()"><figcaption><h3>Cubierta de mármol</h3><a href="#" data-add="Ambiente: Cubierta de mármol">Cotizar este ambiente</a></figcaption></figure>
+
+    <figure class="ph"><span class="off">-10%</span><img loading="lazy" src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80" alt="Isla de cocina con iluminación colgante" onerror="this.remove()"><figcaption><h3>Isla con carácter</h3><a href="#" data-add="Ambiente: Isla con carácter">Cotizar este ambiente</a></figcaption></figure>
+
+  </div>
+
+</div></section>
+
+
+
+<section class="sv" id="servicios"><div class="wrap">
+
+  <h2>Servicios a tu medida</h2>
+
+  <p class="lead">Del diseño a la instalación, con acompañamiento personalizado.</p>
+
+  <div class="svg">
+
+    <article><div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&w=800&q=75" alt="Cocina blanca elegante" onerror="this.remove()"></div><h3>Diseño y fabricación de cocinas</h3><p>Selección e instalación de encimeras con corte, ensamblaje de piezas y paredes.</p><button class="btn dk sm" data-add="Servicio: Diseño y fabricación de cocinas">Cotizar servicio</button></article>
+
+    <article><div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=800&q=75" alt="Baño moderno con grifería negra" onerror="this.remove()"></div><h3>Cubiertas y acabados de baño en cuarzo</h3><p>Un baño moderno, sofisticado y luminoso, con cubiertas y acabados en cuarzo.</p><button class="btn dk sm" data-add="Servicio: Cubiertas y acabados de baño en cuarzo">Cotizar servicio</button></article>
+
+    <article><div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=75" alt="Canal pulido en cocina" onerror="this.remove()"></div><h3>Instalación de canales</h3><p>Canales pulidos hechos a medida, con materiales de alta calidad y acabado impecable.</p><button class="btn dk sm" data-add="Servicio: Instalación de canales">Cotizar servicio</button></article>
+
+  </div>
+
+</div></section>
+
+
+
+<section class="cl"><div class="wrap">
+
+  <h2>Cuéntanos tu idea. Nosotros nos adaptamos.</h2>
+
+  <p>Comparte tu espacio y lo que imaginas. Te respondemos con una propuesta pensada para ti.</p>
+
+  <button class="btn fill" id="cta">Pedir mi cotización</button>
+
+</div></section>
+
+<div class="wrap" style="padding-bottom:42px;text-align:center"><a class="btn fill" href="/productos.html">Abrir catálogo y cotizar con PostgreSQL</a></div></main>
+
+
+
+<footer id="contacto"><div class="wrap">
+
+  <div class="fg">
+
+    <div><a class="logo" href="#inicio" style="color:#fff">Wood<b>·</b>Stone</a><p style="margin-top:10px;max-width:28ch">“Calidad que se ve, se siente y perdura con el tiempo.”</p></div>
+
+    <div><h3>Soporte</h3><ul><li><a href="#">Preguntas frecuentes</a></li><li><a href="#">Términos y condiciones</a></li><li><a href="#">Política de privacidad</a></li></ul></div>
+
+    <div><h3>Empresa</h3><ul><li><a href="#">Sobre nosotros</a></li></ul></div>
+
+    <div><h3>Contacto</h3><ul><li>Carretera San Miguel, Usulután</li><li>info@ejemplo.com</li><li>+503 7575 5056</li><li>Lun–Vie 8:00–16:30 · Sáb 8:00–12:00</li></ul></div>
+
+  </div>
+
+  <p class="cp">© 2026 Wood·Stone. Maqueta demostrativa: contacto, precios y ofertas por confirmar. Fotografías de Unsplash, reemplazar por fotos propias.</p>
+
+</div></footer>
+
+
+
+<div class="dim" id="dim"></div>
+
+<aside id="panel" role="dialog" aria-label="Mi cotización" aria-hidden="true">
+
+  <div class="ah"><h2>Mi cotización</h2><button class="cls" id="close" aria-label="Cerrar">×</button></div>
+
+  <ul id="ql"></ul>
+
+  <p class="dm">Demostrativo: abre WhatsApp con tu lista. Confirmar el número real antes de publicar.</p>
+
+  <a class="btn dk" id="wa" href="#" target="_blank" rel="noopener" style="text-align:center">Enviar por WhatsApp</a>
+
+</aside>
+
+
+
+<script src="/js/api.js" defer></script>
+<script src="/js/app.js" defer></script>
+
+</body>
+
+</html>

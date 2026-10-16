@@ -1,98 +1,44 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Wood·Stone — Proyecto integrable con pnpm
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Requisitos
+Node.js 22+, pnpm 10, PostgreSQL 15+.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ pnpm install
+```powershell
+corepack enable
+corepack prepare pnpm@10.18.0 --activate
+pnpm install
+Copy-Item .env.example .env
+# Cree una base PostgreSQL llamada woodstone y configure DATABASE_URL en .env
+# Configure ADMIN_API_KEY con 32+ caracteres impredecibles
+pnpm db:init
+pnpm check
+pnpm test
+pnpm dev
 ```
 
-## Compile and run the project
+Abra http://localhost:3000. Catálogo: `/productos.html`; seguimiento: `/seguimiento.html`.
 
-```bash
-# development
-$ pnpm run start
+## Flujo
+1. El cliente selecciona productos y medidas, completa sus datos y genera una cotización en PostgreSQL; el servidor recalcula todo.
+2. La cotización entra en `PENDIENTE_REVISION`. Se consulta y descarga PDF con el token del navegador.
+3. Un administrador aprueba la cotización con `POST /api/admin/quotes/:id/approve` y header `x-admin-key` (la clave no se expone al navegador).
+4. El cliente actualiza seguimiento, convierte la cotización aprobada a pedido, completa su entrega y simula un pago **exclusivamente de prueba**.
+5. Se consulta el historial de estados. La creación de facturas administrativas requiere clave; queda `BORRADOR` sin DTE fiscal autorizado.
 
-# watch mode
-$ pnpm run start:dev
+## Seguridad y límites de producción
+- El token de acceso a cotizaciones es un secreto: está en localStorage por simplicidad del prototipo. Para producción migrar a autenticación con sesiones HttpOnly y CSRF.
+- Los pagos sandbox no capturan tarjetas, no cobran dinero y se desactivan cuando `NODE_ENV=production`.
+- **No hay integración de pagos reales, webhooks verificados, servicio de firma/transmisión a MH ni DTE válidos autorizados.** El esquema adjunto se conserva en `backend/validators/factura.schema.json` pero **no se afirma su vigencia oficial**. Las rutas para JSON fiscal y PDF autorizado rechazan entregas inexistentes.
+- Antes de producción se requiere integrar proveedor de pagos y API MH, validación Ajv del esquema oficial vigente, correlativos fiscales, pruebas de aceptación, HTTPS, autenticación administrativa robusta, cifrado de datos, rate limiting, backups, protección contra abuso y controles tributarios.
+- Las fotografías, datos de contacto y precios de catálogo son demostrativos hasta que la empresa los confirme.
+- Las cotizaciones y pedidos guardan precios históricos; los importes son calculados en backend. La aprobación administrativa es necesaria para vender productos a medida.
 
-# production mode
-$ pnpm run start:prod
-```
+## Endpoints
+Productos: `GET /api/products`, `GET /api/products/:id`.
+Cotizaciones: `POST /api/quotes`, `GET /api/quotes/:id`, `GET /api/quotes/:id/pdf`, `POST /api/quotes/:id/submit`, `POST /api/quotes/:id/checkout`.
+Administración: `GET /api/admin/quotes`, `POST /api/admin/quotes/:id/approve`.
+Pedidos: `GET /api/orders/:id`, `POST /api/orders/:id/confirm-details`, `GET /api/orders/:id/status`.
+Pagos: `POST /api/payments/initiate`, `POST /api/payments/:id/sandbox-confirm`, `GET /api/payments/:id/status`, `POST /api/payments/webhook` (501 hasta integración).
+Factura: `POST /api/invoices/generate` (borrador), `GET /api/invoices/:id`, `/json`, `/pdf`, `/status` (JSON y PDF autorizados no se fabrican).
 
-## Run tests
-
-```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+El header `x-access-token` es obligatorio para endpoints de recursos del cliente y `Idempotency-Key` para pagos. La clave `x-admin-key` solo se utiliza en herramientas administrativas fuera del frontend público.
